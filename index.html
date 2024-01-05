@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Sample Map</title>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css" />
+  <script src="https://js.arcgis.com/4.16/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/SceneView",
+      "esri/layers/GeoJSONLayer",
+      "esri/layers/SceneLayer", "esri/layers/GraphicsLayer", "esri/Graphic", "esri/request"
+    ], function (Map, SceneView, GeoJSONLayer, SceneLayer,
+      GraphicsLayer, Graphic, esriRequest) {
+      var createGraphic = function (data) {
+        return new Graphic({
+          geometry: data,
+          symbol: data.symbol,
+          attributes: data,
+          popupTemplate: data.popupTemplate
+        });
+      };
+
+      // khai báo
+      const nen = new GeoJSONLayer({
+        url: "./nen.geojson"
+      })
+
+      const tang1 = new GeoJSONLayer({
+        url: "./tang1.geojson"
+      })
+
+      const banghieu = new GeoJSONLayer({
+        url: "./banghieu.geojson"
+      })
+
+      const thanh = new GeoJSONLayer({
+        url: "./thanh.geojson"
+      })
+
+      const thanh2 = new GeoJSONLayer({
+        url: "./thanh2.geojson"
+      })
+
+
+      const cot = new GeoJSONLayer({
+        url: "./cot.geojson"
+      })
+
+      const bacthang = new GeoJSONLayer({
+        url: "./bacthang.geojson"
+      })
+      const congvao = new GeoJSONLayer({
+        url: "./congvao.geojson"
+      })
+      const ngan = new GeoJSONLayer({
+        url: "./ngan.geojson"
+      })
+      const ngan2 = new GeoJSONLayer({
+        url: "./ngan2.geojson"
+      })
+      const ngan3 = new GeoJSONLayer({
+        url: "./ngan3.geojson"
+      })
+      const tang2 = new GeoJSONLayer({
+        url: "./tang2.geojson"
+      })
+      const tang3 = new GeoJSONLayer({
+        url: "./tang3.geojson"
+      })
+      const banner = new GeoJSONLayer({
+        url: "./banner.geojson"
+      })
+      const cot2 = new GeoJSONLayer({
+        url: "./cot2.geojson"
+      })
+      const ngan4 = new GeoJSONLayer({
+        url: "./ngan4.geojson"
+      })
+      const ngan5 = new GeoJSONLayer({
+        url: "./ngan5.geojson"
+      })
+      const cot3 = new GeoJSONLayer({
+        url: "./cot3.geojson"
+      })
+      const cot4 = new GeoJSONLayer({
+        url: "./cot4.geojson"
+      })
+      const thanhngang = new GeoJSONLayer({
+        url: "./thanhngang.geojson"
+      })
+      const cuaso = new GeoJSONLayer({
+        url: "./cuaso.geojson"
+      })
+      const thanhchia = new GeoJSONLayer({
+        url: "./thanhchia.geojson"
+      })
+      const cot5 = new GeoJSONLayer({
+        url: "./cot5.geojson"
+      })
+      const maiche = new GeoJSONLayer({
+        url: "./maiche.geojson"
+      })
+      const bencanh = new GeoJSONLayer({
+        url: "./bencanh.geojson"
+      })
+      const nocnha = new GeoJSONLayer({
+        url: "./nocnha.geojson"
+      })
+      const tuong = new GeoJSONLayer({
+        url: "./tuong.geojson"
+      })
+      const den = new GeoJSONLayer({
+        url: "./den.geojson"
+      })
+      const cotdung = new GeoJSONLayer({
+        url: "./cotdung.geojson"
+      })
+      const maichetangthuong = new GeoJSONLayer({
+        url: "./maichetangthuong.geojson"
+      })
+      const cotsanthuong = new GeoJSONLayer({
+        url: "./cotsanthuong.geojson"
+      })
+      const loilensanthuong = new GeoJSONLayer({
+        url: "./loilensanthuong.geojson"
+      })
+      const cuasanthuong = new GeoJSONLayer({
+        url: "./cuasanthuong.geojson"
+      })
+      // in ra
+      nen.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 6, // chiều cao vậy thể 
+            material: {
+              color: "#B8D3E5"
+            }
+          }]
+        }
+      };
+
+
+      tang1.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 20, // chiều cao vậy thể 
+            material: {
+              color: "#93C8E6"
+            }
+          }]
+        }
+      };
+
+      banghieu.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 18, // chiều cao vậy thể 
+            material: {
+              color: "#C2CAD5"
+            }
+          }]
+        }
+      };
+
+      thanh.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 18, // chiều cao vậy thể 
+            material: {
+              color: "#ACBBCE"
+            }
+          }]
+        }
+      };
+
+      thanh2.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.5, // chiều cao vậy thể 
+            material: {
+              color: "#ACBBCE"
+            }
+          }]
+        }
+      };
+
+
+      cot.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 55, // chiều cao vậy thể 
+            material: {
+              color: "white"
+            }
+          }]
+        }
+      };
+
+      bacthang.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.5, // chiều cao vậy thể 
+            material: {
+              color: "grey"
+            }
+          }]
+        }
+      };
+
+      congvao.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 6, // chiều cao vậy thể 
+            material: {
+              color: "black"
+            }
+          }]
+        }
+      };
+
+      ngan.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.5, // chiều cao vậy thể 
+            material: {
+              color: "#BECDE0"
+            }
+          }]
+        }
+      };
+      ngan2.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.2, // chiều cao vậy thể 
+            material: {
+              color: "grey"
+            }
+          }]
+        }
+      };
+      ngan3.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.2, // chiều cao vậy thể 
+            material: {
+              color: "white"
+            }
+          }]
+        }
+      };
+
+      tang2.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 10, // chiều cao vậy thể 
+            material: {
+              color: "#93C8E6"
+            }
+          }]
+        }
+      };
+
+      tang3.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 10, // chiều cao vậy thể 
+            material: {
+              color: "#93C8E6"
+            }
+          }]
+        }
+      };
+
+      banner.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 6, // chiều cao vậy thể 
+            material: {
+              color: "#DB454A"
+            }
+          }]
+        }
+      };
+
+      cot2.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 40, // chiều cao vậy thể 
+            material: {
+              color: "#E2E2E0"
+            }
+          }]
+        }
+      };
+
+      ngan4.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.2, // chiều cao vậy thể 
+            material: {
+              color: "#B71F24"
+            }
+          }]
+        }
+      };
+
+      ngan5.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.2, // chiều cao vậy thể 
+            material: {
+              color: "#B34E50"
+            }
+          }]
+        }
+      };
+
+      cot3.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 37.7, // chiều cao vậy thể 
+            material: {
+              color: "#E2E2E0"
+            }
+          }]
+        }
+      };
+
+      cot4.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 19, // chiều cao vậy thể 
+            material: {
+              color: "#E2E2E0"
+            }
+          }]
+        }
+      };
+
+      thanhngang.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.3, // chiều cao vậy thể 
+            material: {
+              color: "#E2E2E0"
+            }
+          }]
+        }
+      };
+
+      cuaso.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 1.5, // chiều cao vậy thể 
+            material: {
+              color: "#E2E2E0"
+            }
+          }]
+        }
+      };
+
+      thanhchia.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.4, // chiều cao vậy thể 
+            material: {
+              color: "#E2E2E0"
+            }
+          }]
+        }
+      };
+
+      cot5.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 6.5, // chiều cao vậy thể 
+            material: {
+              color: "#E2E2E0"
+            }
+          }]
+        }
+      };
+
+      maiche.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 1, // chiều cao vậy thể 
+            material: {
+              color: "#E9DFDA"
+            }
+          }]
+        }
+      };
+
+      bencanh.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 55, // chiều cao vậy thể 
+            material: {
+              color: "#D1403B"
+            }
+          }]
+        }
+      };
+
+      nocnha.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 55, // chiều cao vậy thể 
+            material: {
+              color: "#D1403B"
+            }
+          }]
+        }
+      };
+
+      tuong.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 9.3, // chiều cao vậy thể 
+            material: {
+              color: "white"
+            }
+          }]
+        }
+      };
+
+      den.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 0.1, // chiều cao vậy thể 
+            material: {
+              color: "white"
+            }
+          }]
+        }
+      };
+
+      cotdung.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 2, // chiều cao vậy thể 
+            material: {
+              color: "white"
+            }
+          }]
+        }
+      };
+
+      maichetangthuong.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 1, // chiều cao vậy thể 
+            material: {
+              color: "#D6E7E9"
+            }
+          }]
+        }
+      };
+
+      cotsanthuong.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 8, // chiều cao vậy thể 
+            material: {
+              color: "#D6E7E9"
+            }
+          }]
+        }
+      };
+
+      loilensanthuong.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 5, // chiều cao vậy thể 
+            material: {
+              color: "#8F7C8A"
+            }
+          }]
+        }
+      };
+
+      cuasanthuong.renderer = {
+        type: "simple",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [{
+            type: "extrude",
+            size: 2, // chiều cao vậy thể 
+            material: {
+              color: "#2B262A"
+            }
+          }]
+        }
+      };
+
+
+
+
+
+
+
+
+      const map = new Map({
+        basemap: "topo-vector",
+        ground: "world-elevation",
+        layers: [
+          nen, tang1, banghieu, thanh, thanh2, cot, congvao, bacthang, ngan2, ngan3, tang2, tang3, cot2, ngan, ngan4, ngan5, cot3, cot4, thanhngang, cuaso, thanhchia, cot5, maiche, bencanh, tuong, den, cotdung
+          , maichetangthuong, cotsanthuong, loilensanthuong, cuasanthuong
+        ] //end layers
+      });
+
+
+      const view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        center: [106.76889702886291,
+          10.849791811086178],
+        zoom: 19
+      });
+
+      view.popup.defaultPopupTemplateEnabled = true;
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
